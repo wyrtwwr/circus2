@@ -1,0 +1,162 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circus - Архитектура</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page3-body">
+  <div class="page">
+    <header class="top-menu" id="top-menu">
+      <a href="index.html" class="logo-link"><img class="header_icon" src="img/icon1_header.png" alt=""></a>
+
+      <nav class="menu-center">
+        <a href="index.html" class="main-link">Главная</a>
+        <a href="" class="menu-toggle"><img class="header_icon2" src="img/ornament.png" alt=""></a>
+        <div class="menu-right">
+          <a href="page2.html" class="menu-link">История</a>
+          <a href="page3.html" class="menu-link">Архитектура</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="page3_block1">
+      <img class="page3_imgornament" src="img/page3_ornament.png" alt="" role="button" tabindex="0">
+
+      <div class="txt_page3_block1">
+        <h1>Архитектура</h1>
+        <p>Цирк Алматы это яркий образец советского модернизма, построенный в 1972 году по проекту архитекторов Владимира Кацева и Арыстана Кайнарбаева.</p>
+      </div>
+    </div>
+    <div class="page3_block2">
+  <h1>Архитекторы</h1>
+  <img class="pimg_arh" src="img/page3_arhit.png" alt="">
+
+  <div class="architect-switch">
+    <button type="button" class="arch-btn" data-arch="ded1" aria-label="Показать Владимира Кацева">1</button>
+    <button type="button" class="arch-btn" data-arch="ded2" aria-label="Показать Арыстана Кайнарбаева">2</button>
+  </div>
+
+  <div class="architect-list" id="architect-list">
+  </div>
+
+    </div>
+    <footer class="site-footer">
+      <div class="footer-left">
+        <a href="https://t.me/vhutein" class="footer-social-link"><img src="img/tg.png" alt="Telegram" class="footer-social-icon"></a>
+        <a href="https://vk.com/vhutein" class="footer-social-link"><img src="img/vk.png" alt="VK" class="footer-social-icon"></a>
+      </div>
+      <div class="footer-right">
+        <a href="https://www.vhutein.ru"><img src="img/logo_foot.png" alt="Footer logo" class="footer-logo"></a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const topMenu = document.getElementById('top-menu');
+    const menuToggle = document.querySelector('.menu-toggle');
+
+    menuToggle.addEventListener('click', function (event) {
+      event.preventDefault();
+      topMenu.classList.toggle('menu-open');
+    });
+
+    const ornament = document.querySelector('.page3_imgornament');
+    const textBlock = document.querySelector('.txt_page3_block1');
+
+    function showArchitectureText() {
+      if (textBlock.classList.contains('is-visible')) {
+        return;
+      }
+
+      textBlock.classList.add('is-visible');
+      ornament.setAttribute('aria-expanded', 'true');
+    }
+
+    ornament.setAttribute('aria-expanded', 'false');
+    ornament.addEventListener('click', function (event) {
+      event.preventDefault();
+      showArchitectureText();
+    });
+
+    ornament.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        showArchitectureText();
+      }
+    });
+
+    const architectList = document.getElementById('architect-list');
+    const architectButtons = document.querySelectorAll('.arch-btn');
+    const renderedArchitects = new Set();
+
+    const architectData = {
+      ded1: {
+        src: 'img/ded1.png',
+        alt: 'Кацев Владимир Зеликович',
+        text: 'Кацев Владимир Зеликович (1929-2013), заслуженный архитектор Казахстана, почетный профессор Международной академии архитектуры стран Востока, почетный профессор Казахской государственной архитектурно-строительной академии, член правления Союза архитекторов республики Казахстан.<br><br>С 1989 года — главный архитектор проектов архфонда Союза архитекторов Казахстана. Был членом секции изобразительного искусства и архитектуры Комиссии по Государственным премиям Казахстана в области литературы, искусства и архитектуры при Правительстве Казахстана.'
+      },
+      ded2: {
+        src: 'img/ded2.png',
+        alt: 'Арыстан Сайлаубаевич Кайнарбаев',
+        text: 'Арыстан Сайлаубаевич Кайнарбаев (род. 1 июля 1969, Алма-Ата) — архитектор, заслуженный архитектор КазССР (1978).<br><br>С 1967 года главный архитектор Алматинского государственного проектного института города «Алматыгипрогор». С 1989 года руководил коллективом творческо-производственного объединения «Архитектурный фонд» при Союзе архитекторов Казахстана.'
+      }
+    };
+
+    architectButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        const key = button.dataset.arch;
+        const data = architectData[key];
+
+        if (!data) {
+          return;
+        }
+
+        if (!renderedArchitects.has(key)) {
+          const item = document.createElement('article');
+          item.className = 'architect-item';
+
+          const photo = document.createElement('img');
+          photo.className = 'architect-photo';
+          photo.src = data.src;
+          photo.alt = data.alt;
+
+          const text = document.createElement('div');
+          text.className = 'architect-text';
+          text.innerHTML = data.text;
+
+          const collapse = document.createElement('button');
+          collapse.type = 'button';
+          collapse.className = 'arch-item-collapse';
+          collapse.setAttribute('aria-label', 'Свернуть карточку');
+
+          collapse.addEventListener('click', function () {
+            item.remove();
+            renderedArchitects.delete(key);
+
+            const ownerButton = document.querySelector('.arch-btn[data-arch="' + key + '"]');
+            if (ownerButton) {
+              ownerButton.classList.remove('is-active');
+            }
+
+            if (architectList.children.length === 0) {
+              architectList.classList.remove('is-visible');
+            }
+          });
+
+          item.appendChild(photo);
+          item.appendChild(text);
+          item.appendChild(collapse);
+          architectList.appendChild(item);
+
+          renderedArchitects.add(key);
+          architectList.classList.add('is-visible');
+        }
+
+        button.classList.add('is-active');
+      });
+    });
+  </script>
+</body>
+</html>
