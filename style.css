@@ -966,3 +966,251 @@ gap: 10vw;
     cursor: pointer;
     opacity: 0 !important;
 }
+
+.tickets_block_page3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vw;
+    margin: 10vw 0 4vw;
+}
+
+.tick1,
+.tick2,
+.tick3 {
+    position: relative;
+    width: min(38vw, 620px);
+    max-width: 680px;
+    min-width: 280px;
+    cursor: pointer;
+}
+
+.tickets_row_top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.2vw;
+    width: 100%;
+}
+
+.tickets_row_bottom {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.tick1_bg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.tick1_txt,
+.tick1_two {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tick1_txt {
+    width: 91%;
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(13px, 1vw, 20px);
+    line-height: 1.4;
+    text-align: left;
+}
+
+.tick1_two {
+    width: 70%;
+    height: auto;
+    display: none;
+}
+
+.tick1.is-swapped .tick1_txt,
+.tick2.is-swapped .tick1_txt,
+.tick3.is-swapped .tick1_txt {
+    display: none;
+}
+
+.tick1.is-swapped .tick1_two,
+.tick2.is-swapped .tick1_two,
+.tick3.is-swapped .tick1_two {
+    display: block;
+}
+
+.lenta_block_page3 {
+    position: relative;
+    width: 88vw;
+    margin: 1.8vw auto 4vw;
+}
+
+.lenta_bg_page3 {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.lenta_txt_page3 {
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 83%;
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(13px, 1.05vw, 21px);
+    line-height: 1.4;
+    text-align: center;
+}
+
+.slider_block_page3 {
+    position: relative;
+    width: 100%;
+    margin:13vw auto 14vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.3vw;
+}
+
+.slider_stage {
+    position: relative;
+    width: 86vw;
+    max-width: 1500px;
+    height: clamp(260px, 31vw, 620px);
+}
+
+.slider_card {
+    position: absolute;
+    top: 50%;
+    aspect-ratio: 3 / 4;
+    border-radius: 2px;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.24);
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.slider_card_left {
+    left: 6%;
+    width: 31.5%;
+    transform: translateY(-50%) rotate(-15deg);
+    transform-origin: center;
+    z-index: 1;
+}
+
+.slider_card_center {
+    left: 50%;
+    width: 38%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+.slider_card_right {
+    right: 6%;
+    width: 31.5%;
+    transform: translateY(-50%) rotate(15deg);
+    transform-origin: center;
+    z-index: 1;
+}
+
+.slider_nav {
+    position: relative;
+    width: clamp(32px, 2.6vw, 52px);
+    height: clamp(32px, 2.6vw, 52px);
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+}
+
+.slider_nav::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+}
+
+.slider_prev::before {
+    border-right: 15px solid #ffffff;
+    transform: translate(-50%, -50%);
+}
+
+.slider_next::before {
+    border-left: 15px solid #ffffff;
+    transform: translate(-50%, -50%);
+}
+
+.slider_nav:hover::before,
+.slider_nav:focus-visible::before {
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
+}
+
+.slider_nav:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+@media (max-width: 760px) {
+    .tickets_block_page3 {
+        gap: 4vw;
+    }
+
+    .tickets_row_top {
+        flex-direction: column;
+        gap: 4vw;
+    }
+
+    .tick1,
+    .tick2,
+    .tick3 {
+        width: min(88vw, 620px);
+        min-width: 0;
+    }
+
+    .lenta_block_page3 {
+        width: 92vw;
+        margin: 2vw auto 5vw;
+    }
+
+    .lenta_txt_page3 {
+        width: 90%;
+        font-size: clamp(12px, 3vw, 15px);
+        line-height: 1.35;
+    }
+
+    .slider_block_page3 {
+        gap: 1.5vw;
+        margin: 4vw auto 7vw;
+    }
+
+    .slider_stage {
+        width: 90vw;
+        height: clamp(210px, 56vw, 440px);
+    }
+
+    .slider_card_left,
+    .slider_card_right {
+        width: 30%;
+    }
+
+    .slider_card_left {
+        left: 1%;
+        transform: translateY(-50%) rotate(-10deg);
+    }
+
+    .slider_card_right {
+        right: 1%;
+        transform: translateY(-50%) rotate(10deg);
+    }
+
+    .slider_card_center {
+        width: 47%;
+    }
+}

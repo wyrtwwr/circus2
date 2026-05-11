@@ -41,6 +41,47 @@
   <div class="architect-list" id="architect-list">
   </div>
 
+
+  <div class="tickets_block_page3">
+    <div class="tickets_row_top">
+      <div class="tick1" role="button" tabindex="0" aria-pressed="false">
+        <img class="tick1_bg" src="img/tickets.png" alt="">
+        <p class="tick1_txt">Здание отличается уникальной круглой формой, похожей на Юрту, сочетающей современные линии с национальными мотивами</p>
+        <img class="tick1_two" src="img/image_ticks1.png" alt="">
+      </div>
+
+      <div class="tick2" role="button" tabindex="0" aria-pressed="false">
+        <img class="tick1_bg" src="img/tickets.png" alt="">
+        <p class="tick1_txt">Крыша помещения с внутренней стороны напоминает шанырак юрты. Особенная форма крыши выполняет не только декоративную функцию, в нее встроена вентиляционная система</p>
+        <img class="tick1_two" src="img/image_ticks2.png" alt="">
+      </div>
+    </div>
+
+    <div class="tickets_row_bottom">
+      <div class="tick3" role="button" tabindex="0" aria-pressed="false">
+        <img class="tick1_bg" src="img/tickets.png" alt="">
+        <p class="tick1_txt">Строение цирка отличается красивым гиперболическим куполом, который имеет чешуйчатое покрытие светлого цвета. Овальные линии, опоясывающие верхнюю часть купола, переходят в малую округлую форму.</p>
+        <img class="tick1_two" src="img/image_ticks3.png" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="lenta_block_page3">
+    <img class="lenta_bg_page3" src="img/lenta.png" alt="">
+    <p class="lenta_txt_page3">Цирк состоит из кругового главного корпуса и прямоугольного двухэтажного административно-бытового комплекса. В административно-бытовом корпусе размещены тренировочный манеж, столовая, помещения для животных, артистические гримуборные. Также в цирке есть два внутренних двора для выгула животных.</p>
+  </div>
+
+  <section class="slider_block_page3" aria-label="Фотогалерея цирка">
+    <button type="button" class="slider_nav slider_prev" aria-label="Предыдущее фото"></button>
+
+    <div class="slider_stage" aria-live="polite">
+      <img class="slider_card slider_card_left" src="img/slider/s1.png" alt="Фотография цирка слева">
+      <img class="slider_card slider_card_center" src="img/slider/s2.png" alt="Центральная фотография цирка">
+      <img class="slider_card slider_card_right" src="img/slider/s3.png" alt="Фотография цирка справа">
+    </div>
+
+    <button type="button" class="slider_nav slider_next" aria-label="Следующее фото"></button>
+  </section>
     </div>
     <footer class="site-footer">
       <div class="footer-left">
@@ -157,6 +198,84 @@
         button.classList.add('is-active');
       });
     });
+
+    const ticketCards = document.querySelectorAll('.tick1, .tick2, .tick3');
+
+    ticketCards.forEach(function (ticketCard) {
+      const toggleTicketContent = function () {
+        const isSwapped = ticketCard.classList.toggle('is-swapped');
+        ticketCard.setAttribute('aria-pressed', isSwapped ? 'true' : 'false');
+      };
+
+      ticketCard.addEventListener('click', toggleTicketContent);
+
+      ticketCard.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          toggleTicketContent();
+        }
+      });
+    });
+
+    const sliderStage = document.querySelector('.slider_stage');
+    const sliderPrev = document.querySelector('.slider_prev');
+    const sliderNext = document.querySelector('.slider_next');
+    const sliderLeft = document.querySelector('.slider_card_left');
+    const sliderCenter = document.querySelector('.slider_card_center');
+    const sliderRight = document.querySelector('.slider_card_right');
+
+    const sliderImages = [
+      'img/slider/s1.png',
+      'img/slider/s2.png',
+      'img/slider/s3.png',
+      'img/slider/s4.png'
+    ];
+
+    if (sliderStage && sliderPrev && sliderNext && sliderLeft && sliderCenter && sliderRight) {
+      let currentIndex = 1;
+
+      const normalize = function (index) {
+        const length = sliderImages.length;
+        return ((index % length) + length) % length;
+      };
+
+      const renderSlider = function () {
+        const leftIndex = normalize(currentIndex - 1);
+        const centerIndex = normalize(currentIndex);
+        const rightIndex = normalize(currentIndex + 1);
+
+        sliderLeft.src = sliderImages[leftIndex];
+        sliderCenter.src = sliderImages[centerIndex];
+        sliderRight.src = sliderImages[rightIndex];
+      };
+
+      sliderPrev.addEventListener('click', function () {
+        currentIndex = normalize(currentIndex - 1);
+        renderSlider();
+      });
+
+      sliderNext.addEventListener('click', function () {
+        currentIndex = normalize(currentIndex + 1);
+        renderSlider();
+      });
+
+      sliderStage.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          currentIndex = normalize(currentIndex - 1);
+          renderSlider();
+        }
+
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          currentIndex = normalize(currentIndex + 1);
+          renderSlider();
+        }
+      });
+
+      sliderStage.setAttribute('tabindex', '0');
+      renderSlider();
+    }
   </script>
 </body>
 </html>
