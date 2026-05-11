@@ -1355,7 +1355,7 @@ gap: 10vw;
 }
 
 .block9_title {
-    margin: 0;
+    margin-left: 15vw;
     color: #ffffff;
     font-size: clamp(22px, 1.7vw, 32px);
     line-height: 1;
@@ -1371,7 +1371,7 @@ gap: 10vw;
 
 .block9_icon {
     display: block;
-    width: clamp(28px, 2.05vw, 41px);
+    width: clamp(50px, 2.05vw, 41px);
     height: auto;
     transition: transform 0.3s ease;
 }
@@ -1402,7 +1402,7 @@ gap: 10vw;
 }
 
 .block9_page3.is-open .block9_icon {
-    transform: rotate(45deg);
+    transform: rotate(0deg);
 }
 
 .block9_row {
